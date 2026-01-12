@@ -78,7 +78,7 @@ class Droid(db.Model):
     model: Mapped[str] = mapped_column(String(200), nullable=False)
     creator: Mapped[str] = mapped_column(String(200), nullable=False)
 
-    # Favoritos
+    #Favoritos
     favorited_by: Mapped[List["FavoriteDroid"]] = relationship(back_populates="droid")
 
     def serialize(self):
@@ -89,7 +89,7 @@ class Droid(db.Model):
         }
 
 
-# a varios
+#tablas muchos a varios
 
 class FavoriteVehicle(db.Model):
     __tablename__ = "favorite_vehicles"
@@ -117,7 +117,7 @@ class FavoritePlanet(db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     planets_id: Mapped[int] = mapped_column(ForeignKey("planets.id"))
 
-    # Relaciones
+    #Relaciones
     user: Mapped["User"] = relationship(back_populates="favorite_planets")
     planet: Mapped["Planet"] = relationship(back_populates="favorited_by")
 
@@ -136,7 +136,7 @@ class FavoriteDroid(db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     droid_id: Mapped[int] = mapped_column(ForeignKey("droids.id"))
 
-    # Relaciones
+    # relaciones
     user: Mapped["User"] = relationship(back_populates="favorite_droids")
     droid: Mapped["Droid"] = relationship(back_populates="favorited_by")
 
